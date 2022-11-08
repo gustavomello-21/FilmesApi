@@ -1,4 +1,4 @@
-namespace Netflix.Api;
+namespace Netflix.Api.Models;
 
 public class WeatherForecast
 {

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Netflix.Api.Models;
 
 namespace Netflix.Api.Controllers;
 
