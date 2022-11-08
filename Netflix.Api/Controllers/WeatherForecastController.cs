@@ -7,6 +7,8 @@ namespace Netflix.Api.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
+    private static List<WeatherForecast> weathers;
+
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -19,7 +21,7 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet]
+    [HttpGet("")]
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -31,8 +33,23 @@ public class WeatherForecastController : ControllerBase
         .ToArray();
     }
 
-    [HttpGet("/Nome")]
-    public string Nome() {
-        return "OLA";
+    [HttpGet("GetNome/{temperatura}")]
+    public IActionResult Nome(int temperatura)
+    {
+        if(temperatura == 0) {
+            return BadRequest("TÁ MUITO FRIO");
+        }
+
+        return Ok(new WeatherForecast() { TemperatureC = temperatura });
+    } 
+
+    [HttpPost("")]
+    public IActionResult Post([FromBody] WeatherForecast? weather)
+    {
+        if(weather is null) {
+            return BadRequest();
+        }
+
+        return Ok();
     } 
 }
